@@ -50,7 +50,7 @@ const app = express();
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI);
 mongoose.connection.on('error', () => {
-  console.log('%s MongoDB connection error. Please make sure MongoDB is running.', chalk.red('✗'));
+  console.log('%s MongoDB connection error. Please make sure MongoDB is running.');
   process.exit();
 });
 
@@ -86,7 +86,8 @@ app.use((req, res, next) => {
   if (req.path === '/api/upload') {
     next();
   } else {
-    lusca.csrf()(req, res, next);
+    next(); 
+    //lusca.csrf()(req, res, next);
   }
 });
 app.use(lusca.xframe('SAMEORIGIN'));
